@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:EventsApp.Maui.ViewModels"
+             x:Class="EventsApp.Maui.MainPage"
+             xmlns:model="clr-namespace:EventsApp.Maui.Models"
+             xmlns:viewmodel="clr-namespace:EventsApp.Maui.ViewModels"
+             x:DataType="viewmodel:EventslistingViewModel"
+             Title=" Binding Title">
+
+
+   <Grid ColumnDefinitions="*,*" ColumnSpacing="5" RowDefinitions="*, Auto">
+        <RefreshView Grid.Column="2"
+                   Command="{Binding GeteventListCommand}"
+                   IsRefreshing="{Binding IsRefreshing}">
+            <CollectionView ItemsSource="{Binding events}" SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Events">
+                        <Frame HeightRequest="100">
+                            <Frame.GestureRecognizers
+                                <TapGestureRecognizer Command="{Binding Source= {RelativeSource AncestorType={x:Type viewmodel:EventslistingViewModel }}, Path= GeteventDetailsCommand}"
+                                                      CommandParameter="{Binding .}" />
+                                </Frame.GestureRecognizers>
+                                <HorizontalStackLayout Padding="10" Spacing="5">
+                                <Label Text="{Binding Name}"></Label>
+                                <Label Text="{Binding Description}"></Label>
+                            </HorizontalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+        
+        <Button Text=" Fetch events " Command="{Binding GeteventListCommand}" IsEnabled="{Binding IsLoading}"
+                Grid.Row="1" Grid.Column="0" Margin="9">
+
+
+        </Button>
+    </Grid>
+</ContentPage>

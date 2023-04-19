@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EventsApp.Maui.view.EventDetailsPage"
+            xmlns:viewmodel="clr-namespace:EventsApp.Maui.ViewModels"
+             Title= "{Binding Events.Name}"
+             x:DataType="viewmodel:EventDetailsViewModel">
+    
+    <StackLayout>
+        <Label 
+            Text="{Binding Events.Description}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" FontSize="Large"/>
+    </StackLayout>
+</ContentPage>
